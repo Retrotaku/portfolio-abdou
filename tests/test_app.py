@@ -38,8 +38,10 @@ def test_homepage_renders_required_sections_and_contact_details():
     assert f'href="tel:{PORTFOLIO["phone"]}"' in page
     assert f'href="{escape(PORTFOLIO["linkedin"], quote=True)}"' in page
     assert f'href="{PORTFOLIO["github"]}"' in page
-    assert "Télécharger mon CV" not in page
-    assert "CV bientôt disponible" in page
+    assert "Télécharger mon CV" in page
+    assert "CV bientôt disponible" not in page
+    assert "/static/files/cv-abdou-salifou.pdf" in page
+    assert "/static/images/photo-profil.png" in page
 
 
 def test_project_details_render_and_unknown_project_is_404():
@@ -60,12 +62,19 @@ def test_static_assets_are_served():
     css = client.get("/static/css/style.css")
     script = client.get("/static/js/main.js")
     favicon = client.get("/static/images/favicon.svg")
+    photo = client.get("/static/images/photo-profil.png")
+    cv = client.get("/static/files/cv-abdou-salifou.pdf")
 
     assert css.status_code == 200
     assert "prefers-reduced-motion" in css.get_data(as_text=True)
     assert script.status_code == 200
     assert "aria-expanded" in script.get_data(as_text=True)
     assert favicon.status_code == 200
+    assert photo.status_code == 200
+    assert photo.mimetype == "image/png"
+    assert cv.status_code == 200
+    assert cv.mimetype == "application/pdf"
+    assert cv.data.startswith(b"%PDF-")
 
 
 def test_custom_server_error_page_is_returned():

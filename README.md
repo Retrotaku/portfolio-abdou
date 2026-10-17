@@ -52,11 +52,12 @@ fenêtre ou utiliser le mode appareil des outils de développement du navigateur
   informations projets dans `portfolio_data.py`.
 - Une compétence ou une technologie reste une « piste à confirmer » tant que
   son niveau ou son utilisation n'a pas été confirmé.
-- Ajoutez votre photo dans `static/images/`, puis remplacez l'emplacement
-  réservé dans `templates/index.html` par la photo et un texte alternatif exact.
-- Ajoutez votre CV sous `static/files/cv-abdou-salifou.pdf` pour faire apparaître
-  automatiquement les liens de téléchargement. Vérifiez son contenu avant de
-  l'ajouter au dépôt : le PDF sera accessible publiquement avec le site.
+- Votre photo de profil est enregistrée sous `static/images/photo-profil.png`.
+  Pour la remplacer, gardez ce nom de fichier et vérifiez le texte alternatif
+  dans `templates/index.html`.
+- Votre CV est enregistré sous `static/files/cv-abdou-salifou.pdf` et son lien
+  apparaît automatiquement sur le site. Ce PDF est accessible publiquement :
+  vérifiez son contenu avant chaque mise à jour.
 - Pour modifier le statut d'un projet, réglez son champ `status` dans
   `portfolio_data.py` sur `En conception`, `En développement` ou `Terminé`
   uniquement lorsque cette information est confirmée.
@@ -78,5 +79,6 @@ Pour la publier avec Render (après création et connexion d'un dépôt GitHub) 
 6. Une fois la publication terminée, vérifiez la page d'accueil, les pages
    projets et les liens de contact sur l'URL fournie par l'hébergeur.
 
-Ne publiez pas de fichier `.env`, de secret ou de CV sans avoir vérifié le
-contenu. Le lancement local et les tests ne publient pas le site.
+Ne publiez jamais de fichier `.env` ni de secret. Le CV est inclus parce qu'il
+est destiné au téléchargement public. Tout nouveau commit envoyé sur `main`
+déclenche le déploiement automatique Render du service configuré.
