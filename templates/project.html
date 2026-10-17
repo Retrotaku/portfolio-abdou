@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }} | {{ portfolio.name }}{% endblock %}
+
+{% block content %}
+  <section class="section detail-section">
+    <div class="container detail-container">
+      <a class="back-link" href="{{ url_for('index') }}#projets"><span aria-hidden="true">←</span> Retour aux projets</a>
+      <p class="section-kicker">Projet · {{ project.status or "statut à confirmer" }}</p>
+      <h1 class="detail-title">{{ project.title }}</h1>
+      <p class="detail-lead">{{ project.description }}</p>
+      <div class="detail-grid">
+        <article class="detail-panel">
+          <h2>Besoin traité</h2>
+          <p>{{ project.need }}</p>
+        </article>
+        <article class="detail-panel">
+          <h2>Périmètre envisagé</h2>
+          <ul class="detail-list">
+            {% for feature in project.features %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+        </article>
+      </div>
+      {% if project.technologies %}
+        <div class="detail-panel detail-tech">
+          <h2>Technologies envisagées — à confirmer</h2>
+          <ul class="tag-list">
+            {% for technology in project.technologies %}
+              <li>{{ technology }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% else %}
+        <div class="detail-panel detail-tech">
+          <h2>Technologies</h2>
+          <p>À confirmer.</p>
+        </div>
+      {% endif %}
+      <p class="detail-disclaimer">
+        {% if project.status %}
+          Statut indiqué dans les données du portfolio.
+        {% else %}
+          Aucun statut d'avancement ni dépôt de code n'a été confirmé pour ce projet.
+        {% endif %}
+      </p>
+    </div>
+  </section>
+{% endblock %}
